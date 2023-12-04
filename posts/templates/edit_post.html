@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Edit Post</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    </head>
+<body>
+    <h1>Edit Post</h1>
+    <form method="post">
+        {% csrf_token %}
+        <textarea id="content" name="content">{{ post.content }}</textarea>
+        </br>
+        <div style="display: inline-flex; align-items: center;" >
+            <button id="post-button" type="submit">Update Post</button>
+            <div id="char-counter">{{post.length}}/280</div>
+        </div>
+    </form>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let textarea = document.getElementById('content');
+        let charCounter = document.getElementById('char-counter');
+        let postButton = document.getElementById('post-button');
+
+        textarea.addEventListener('input', function() {
+            let charCount = textarea.value.length;
+            charCounter.textContent = `${charCount}/280`;
+
+            if (charCount > 280) {
+                postButton.disabled = true;
+            } else {
+                postButton.disabled = false;
+            }
+        });
+    });
+</script>
+</html>
