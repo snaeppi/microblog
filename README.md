@@ -39,20 +39,33 @@ pip install django
 
 ### Database Initialization
 
-To initialize the database for different versions of the application:
+To initialize the database for different versions of the application, follow these steps:
 
 1. **Switch Branches**
-   - For the vulnerable version: `git checkout main`
-   - For the fixed version: `git checkout fixed`
+
+   For the vulnerable version:
+   ```bash
+   git checkout main
+   ```
+   For the fixed version:
+   ```bash
+   git checkout fixed
+   ```
 
 2. **Delete Existing Database**
-   - Remove the existing SQLite database file: `rm db.sqlite3`
+   ```bash
+   rm db.sqlite3
+   ```
 
 3. **Apply Migrations**
-   - Create database schema: `python manage.py migrate`
+   ```bash
+   python manage.py migrate
+   ```
 
-4. **Initialize Data**
-   - Populate the database with initial data: `python manage.py initialize`
+4. **Populate Database**
+   ```bash
+   python manage.py initialize
+   ```
 
 ### Running the Application
 
