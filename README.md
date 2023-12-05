@@ -66,6 +66,27 @@ Access the application at `http://127.0.0.1:8000/`.
 
 ## Using the Application
 
+### Predefined Users
+
+The application is initialized with a set of predefined users, including both regular users and an admin user. Here are their details:
+
+#### Regular Users
+
+1. **Alice**
+   - Username: `alice`
+   - Password: `redqueen`
+
+2. **Bob**
+   - Username: `bob`
+   - Password: `squarepants`
+
+#### Admin User
+
+- **Admin**
+  - Username: `admin`
+  - Password: `admin`
+  - Note: This user has administrative privileges (ability to delete any post)
+
 ### Unsecure Version (main branch)
 
   - You can register new users, create posts, edit any posts, and use the search functionality to demonstrate SQL injection.
