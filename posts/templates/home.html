@@ -5,8 +5,7 @@
     <title>Microblog Home</title>
 </head>
 <body>
-    {% if username %}
-    <h1>Hello, {{ username }}</h1>
+    <h1>Hello, {{request.user.username }}</h1>
     <a href="{% url 'logout' %}">Logout</a>
 
     <form method="get" action="">
@@ -14,23 +13,17 @@
         <button type="submit">Search</button>
     </form>
 
-    {% else %}
-        <h1>Welcome to the Microblog</h1>
-        <a href="/login/">Login</a> | <a href="/register/">Register</a>
-    {% endif %}
-
     {% for post in posts %}
         <div>
-            <p><img src="/static/img/cat-hacker.jpg" width="80px"></img><strong>{{ post.author__username }}:</strong> {{ post.content }}</p>
-            {% if request.session.user_id == post.author__id or request.session.is_admin %}
+            <p><img src="/static/img/cat-hacker.jpg" width="80px"></img><strong>{{ post.author.username }}:</strong> {{ post.content }}</p>
+            {% if request.user.id == post.author.id or request.user.is_superuser %}
             <a href="{% url 'delete_post' post.id %}">Delete</a>
             {% endif %}
-            {% if request.session.user_id == post.author__id %}
+            {% if request.user.id == post.author.id %}
                 <a href="{% url 'edit_post' post.id %}">Edit</a>
             {% endif %}
         </div>
     {% endfor %}
-    {% if username %}
     <form method="post">
         {% csrf_token %}
         <textarea id="content" name="content" placeholder="Write your post here..."></textarea>
@@ -40,7 +33,6 @@
             <div id="char-counter">0/280</div>
         </div>
     </form>
-    {% endif %}
 </body>
 <script>
         document.addEventListener('DOMContentLoaded', function() {
