@@ -44,20 +44,25 @@ To initialize the database for different versions of the application, follow the
 1. **Switch Branches**
 
    For the vulnerable version:
+
    ```bash
    git checkout main
    ```
+
    For the fixed version:
+
    ```bash
    git checkout fixed
    ```
 
 2. **Delete Existing Database**
+
    ```bash
    rm db.sqlite3
    ```
 
 3. **Apply Migrations**
+
    ```bash
    python manage.py migrate
    ```
@@ -86,6 +91,7 @@ The application is initialized with a set of predefined users, including both re
 #### Regular Users
 
 1. **Alice**
+
    - Username: `alice`
    - Password: `redqueen`
 
@@ -102,21 +108,24 @@ The application is initialized with a set of predefined users, including both re
 
 ### Unsecure Version (main branch)
 
-  - You can register new users, create posts, edit any posts, and use the search functionality to demonstrate SQL injection.
-  - To log in as admin, input the following "password": 
-  ```
-  ' OR username = 'admin' AND '1'='1
-  ```
-  - To render (username, password) pairs instead of posts, input in the search field: 
-  ```
-  no-post-contains-this-string%' UNION SELECT id, id, username, password FROM posts_user WHERE '%'=' 
-  ```
+- You can register new users, create posts, edit any posts, and use the search functionality to demonstrate SQL injection.
+- To log in as admin, input the following "password":
 
-  - To edit a post that the logged-in user does not own, navigate to `http://127.0.0.1:8000/edit/<post_id>/`, the ids of the posts are in the posting order: first=1, second=2, ...
-  - Input `'` to the search field to see a debug error message with a full traceback. 
+```
+' OR username = 'admin' AND '1'='1
+```
+
+- To render (username, password) pairs instead of posts, input in the search field:
+
+```
+nopostcontainsthisstring%' UNION SELECT id, id, username, password FROM posts_user WHERE '%'='
+```
+
+- To edit a post that the logged-in user does not own, navigate to `http://127.0.0.1:8000/edit/<post_id>/`, the ids of the posts are in the posting order: first=1, second=2, ...
+- Input `'` to the search field to see a debug error message with a full traceback.
 
 ### Fixed Version (fixed branch)
-   - Test all of the above and see that they no longer work.
-   - Try creating a user with a weak password.
-   - Navigate to a page that does not exist, e.g. `http://127.0.0.1:8000/no_such_page` and verify that the debug error message is not displayed.
 
+- Test all of the above and see that they no longer work.
+- Try creating a user with a weak password.
+- Navigate to a page that does not exist, e.g. `http://127.0.0.1:8000/no_such_page` and verify that the debug error message is not displayed.
