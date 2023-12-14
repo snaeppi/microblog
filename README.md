@@ -20,9 +20,9 @@ Microblog is a simple web-based microblogging platform developed with Django. Th
 
 ### Prerequisites
 
-- Python 3.x
+- Python 3.10+
 - Git (for cloning the repository and switching branches)
-- pip (for installing Django)
+- pip (for installing Django 5.0)
 
 ### Clone the Repository
 
